@@ -1,0 +1,26 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP&family=Noto+Serif+TC:wght@700&family=Poetsen+One&display=swap");
+.navbar_item {
+    font-family: "Noto Serif JP", serif;
+    font-weight: 700;
+    font-style: bold;
+    font-size: 1rem;
+    color: #3479cc;
+}
+.nav_barCalculator {
+    font-family: "Noto Serif JP", serif;
+    font-weight: 700;
+    font-size: 1rem;
+    color: #3479cc;
+}
+.nav_barCalculator:hover {
+    background-color: aqua; /* 將文字顏色變為紅色 */
+}
+.logoFont{
+    font-family: "Poetsen One", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 2rem;
+    color: #236cc5;
+    text-decoration: none;
+}
+

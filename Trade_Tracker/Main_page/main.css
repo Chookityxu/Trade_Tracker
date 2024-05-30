@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP&family=Noto+Serif+TC:wght@700&family=Poetsen+One&display=swap');
+.homePage_logoFont{
+    font-family: "Poetsen One", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 3em;
+    color: #236cc5;
+    text-decoration: none;
+}
+
+  /* 定義按鈕樣式 */
+.homePage_button {
+    background-color: blue; /* 設定背景顏色為藍色 */
+    color: white; /* 設定文字顏色為白色 */
+    border-radius: 20px; /* 設定邊角圓滑 */
+    padding: 10px 20px; /* 設定內邊距，使按鈕看起來更大 */
+    text-align: center; /* 設定文字置中 */
+    text-decoration: none; /* 取消文字底線 */
+    font-family: "Noto Sans JP", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 1.5em;
+}
+.homePage_btnGroup {
+    display: flex; 
+    align-items: center;
+    margin-top: 20px;
+}
+.login-register {
+    margin-left: 20px; /* 設定左邊距為 20px */
+}
+.login-register a {
+    text-decoration: none; /* 取消文字底線 */
+    color: #236cc5; /* 設定文字顏色為深藍色 */
+    margin: 0 10px; /* 設定左右邊距為 10px */
+}
+
+.login-register a:hover {
+    color: red; /* 設定文字顏色為紅色 */
+}
+
+.home_Page_indexFont{
+    font-family: "Noto Sans JP", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 1.3em;
+}
+
+/* 定義按鈕在滑鼠懸停時的樣式 */
+.homePage_button:hover {
+    background-color: red; /* 將背景顏色變為深藍色 */
+}
+.my-mt {
+    margin-top: 5rem;
+}
+
+@keyframes floatIn {
+    0% {
+        opacity: 0;
+        transform: translateX(-100%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* 將動畫應用到 .col-md-6 類別的元素上 */
+#mainPage_content {
+    animation: floatIn 2s ease-out;
+}

@@ -1,0 +1,25 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP&family=Noto+Serif+TC:wght@700&family=Poetsen+One&display=swap");
+.inputBox {
+    margin-top: 1rem;
+}
+body {
+    overflow-y: scroll;
+    font-family: "Noto Sans JP", sans-serif; /* 設置字體 */
+}
+/* CSS */
+
+#UserGuide {
+    font-family: "Noto Sans JP", sans-serif; /* 設置字體 */
+    color: #333; /* 設置文字顏色 */
+    padding: 1rem; /* 設置內邊距 */
+    background-color: #c2bfbf;
+}
+
+#UserGuide li {
+    font-size: 1rem; /* 設置列表項目文字大小 */
+    line-height: 1.5; /* 設置列表項目行高 */
+}
+#table_label{
+    margin-top: 1rem;
+    font-family: "Noto Sans JP", sans-serif; /* 設置字體 */
+}

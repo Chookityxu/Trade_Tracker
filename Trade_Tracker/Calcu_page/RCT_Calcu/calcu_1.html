@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>風險報酬比試算</title>
+    </head>
+    <body>
+        <h1>風險報酬比試算</h1>
+        <form id="calculator">
+            <label>
+                <input type="radio" name="situation" value="Long" />
+                做多情境（買入） </label
+            ><br />
+            <label>
+                <input type="radio" name="situation" value="Short" />
+                做空情境（賣出） </label
+            ><br />
+            <label for="entryPrice">買進價格:</label><br />
+            <input type="number" id="entryPrice" name="entryPrice" /><br />
+            <label for="stopLossPrice">預計停損點:</label><br />
+            <input
+                type="number"
+                id="stopLossPrice"
+                name="stopLossPrice"
+            /><br />
+            <label for="targetPrice">預計止利點:</label><br />
+            <input
+                type="number"
+                id="targetPrice"
+                name="targetPrice"
+            /><br /><br />
+            <button type="button" id="cal">計算</button>
+        </form>
+        <div id="result"></div>
+        <br />
+        <div id="RRR"></div>
+        <br />
+        <div id="SLP"></div>
+        <br />
+        <div id="TPP"></div>
+        <br />
+    </body>
+    <script src="./calcu_1.js"></script>
+    <script src="../assets/bootstrap-5.3.3-dist/js/bootstrap.min.js"></script>
+<script src="../assets/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
+</html>
