@@ -35,10 +35,10 @@ let checkInputValue = (input) => {
     return check;
 };
 let getSelectedValue = (selectedID) => {
-    //獲取select選中的值
-    let selectElement = document.getElementById(selectedID); //獲取select元素
-    let selectedIndex = selectElement.selectedIndex; //獲取選中的索引
-    var options = selectElement.options; //獲取所有的option元素
+    //select選中的值
+    let selectElement = document.getElementById(selectedID); //select元素
+    let selectedIndex = selectElement.selectedIndex; //選中的索引
+    var options = selectElement.options; //option元素
     var selectedValue = options[selectedIndex].value; //option[選中的索引].value
     return selectedValue;
 };
@@ -281,17 +281,18 @@ window.onload = function () {
     settingBtn.onclick = function () {
         const ids = ["minFee", "feeDiscount", "quoteNum"]; //需要檢查的input元素的id
         ids.forEach(addInputValidation); //為每個input元素添加檢查函數
+        $('#error-message').hide();
         settingStore.onclick = function () {
             if (ids.every((id) => addInputValidation(id))) {
-                alert("設定成功");
                 minFee = fetchValue("minFee");
                 feeDiscount = fetchValue("feeDiscount");
                 quoteNumber = fetchValue("quoteNum");
                 if (checkInputValue(input)) {
                     main();
                 }
+                $('#error-message').text("儲存成功，放心關閉").show();
             } else {
-                alert("請填寫正確的數值");
+                $('#error-message').text("請填寫正確的數值").show();
             }
         };
     };

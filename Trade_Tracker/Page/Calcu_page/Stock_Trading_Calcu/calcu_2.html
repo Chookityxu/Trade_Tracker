@@ -16,7 +16,7 @@
         <!-- 導覽列 -->
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
-                <a class="logoFont" href="#">TradeTracker </a>
+                <a class="logoFont" href="../../Main_page/main.html">TradeTracker </a>
                 <button
                     class="navbar-toggler"
                     type="button"
@@ -56,7 +56,7 @@
                                     <a
                                         class="dropdown-item my-1 nav_barCalculator active"
                                         aria-current="page"
-                                        href="#"
+                                        href="./calcu_2.html"
                                         >股票交易計算器</a
                                     >
                                 </li>
@@ -64,11 +64,11 @@
                         </li>
                         <li class="nav-item mx-3">
                             <a class="nav-link navbar_item" href="#"
-                                >關於我們</a
+                                >技術分析</a
                             >
                         </li>
                         <li class="nav-item mx-3">
-                            <a class="nav-link navbar_item" href="#"
+                            <a class="nav-link navbar_item" href="../../contactus_page/contactus.html"
                                 >聯絡我們</a
                             >
                         </li>
@@ -84,6 +84,7 @@
                 </div>
             </div>
         </nav>
+        <hr style="border-top: 2px solid #000000;">
         <!-- 內容區域 -->
         <div class="container inputBox">
             <!-- 輸入列 -->
@@ -135,7 +136,7 @@
             <div class="pt-3 ">
                 <div id="table_label" class="w-100 table-responsive-md"></div>
             </div>
-
+            <!-- UserGuide -->
             <div class="my-4" id="UserGuide">
                 <p>Tips：</p>
                 <hr />
@@ -232,6 +233,7 @@
                         </form>
                     </div>
                     <div class="modal-footer">
+                        <div id="error-message" ></div>
                         <button
                             type="button"
                             class="btn btn-secondary"
