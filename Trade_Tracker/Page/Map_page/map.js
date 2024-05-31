@@ -53,7 +53,7 @@ function test() {
                 lng: position.coords.longitude,
             };
             const { Map } = await google.maps.importLibrary("maps");
-            const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
+            const { AdvancedMarkerElement,PinElement } = await google.maps.importLibrary("marker");
             // 創建一個地圖設定中心點
             map = new Map(document.getElementById("map"), {
                 center: pos,
@@ -61,10 +61,15 @@ function test() {
                 mapId: 'aee04ceb2411b364',
             });
 
-            //用戶的位置
+            const pinBackground = new PinElement({
+                background: "#FBBC04",
+                scale: 1.5
+            });
             new AdvancedMarkerElement({
                 map,
                 position: pos,
+                content: pinBackground.element,
+                
             });
             nearbySearch();
         },
