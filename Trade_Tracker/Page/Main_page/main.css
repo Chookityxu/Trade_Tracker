@@ -10,7 +10,7 @@
 
   /* 定義按鈕樣式 */
 .homePage_button {
-    background-color: blue; /* 設定背景顏色為藍色 */
+    background-color: rgb(23, 23, 248); /* 設定背景顏色為藍色 */
     color: white; /* 設定文字顏色為白色 */
     border-radius: 20px; /* 設定邊角圓滑 */
     padding: 10px 20px; /* 設定內邊距，使按鈕看起來更大 */
@@ -37,7 +37,7 @@
 }
 
 .login-register a:hover {
-    color: red; /* 設定文字顏色為紅色 */
+    color: rgb(241, 65, 65); /* 設定文字顏色為紅色 */
 }
 
 .home_Page_indexFont{
