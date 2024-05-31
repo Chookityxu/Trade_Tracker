@@ -1,0 +1,49 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP&family=Noto+Serif+TC:wght@700&family=Poetsen+One&display=swap");
+
+.inputBox {
+    display: flex;
+    justify-content: space-between;
+}
+#UserGuide {
+    font-family: "Noto Sans JP", sans-serif; /* 設置字體 */
+    color: #333; /* 設置文字顏色 */
+    padding: 1rem; /* 設置內邊距 */
+    background-color: #c2bfbf;
+}
+
+#UserGuide li {
+    font-size: 1rem; /* 設置列表項目文字大小 */
+    line-height: 1.5; /* 設置列表項目行高 */
+}
+.modal-body {
+    background-color: #f8f9fa;
+    padding: 1rem;
+}
+#modal-body-font{
+    font-family: "Noto Sans JP", sans-serif; /* 設置字體 */
+    color: red; /* 設置文字顏色 */
+    font-size: 2rem; /* 設置文字大小 */
+    line-height: 1.5; /* 設置行高 */
+    text-align: center; /* 設置文字置中 */
+}
+
+.modal-header {
+    background-color: #343a40;
+    color: #fff;
+}
+
+.modal-footer {
+    background-color: #f8f9fa;
+}
+
+.modal-title {
+    font-size: 24px;
+}
+#table_label{
+    margin-top: 1rem;
+    font-family: "Noto Sans JP", sans-serif; /* 設置字體 */
+}
+#calculator{
+    font-family: "Noto Sans JP", sans-serif; /* 設置字體 */
+    margin-top: 1rem;
+}
