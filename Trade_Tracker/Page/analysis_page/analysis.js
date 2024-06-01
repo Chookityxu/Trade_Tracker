@@ -2,17 +2,20 @@ let chart; // 將chart變數定義在全局範圍內，以便在其他函數中�
 const groupingUnits = [[ 'week', [1] ], [ 'month', [1, 2, 3, 4, 6] ]];
 let data,StockData;
 let chartType = 'candlestick';
-async function loadAndRenderChart(chartType) {
-    const response = await fetch('./test.json');
+async function loadAndRenderChart(chartType) {// 加載並渲染圖表
+    console.log(chartType);
+    const response = await fetch('../../assets/Json/0050.json');
     StockData = await response.json();
     data = StockData.data;
     let seriesData;
     let volumeData;
+    let ma5Data;
+    let ma10Data;
+    let ma20Data;
 
     if (!chart) {
         createStockChart();
     }
-
     if (chartType === 'candlestick' || chartType === 'ohlc') {
         seriesData = data.map(item => [
             Date.parse(item.date),
@@ -21,38 +24,35 @@ async function loadAndRenderChart(chartType) {
             item.low,
             item.close
         ]);
-        volumeData = data.map(item => [
-            Date.parse(item.date),
-            item.volume
-        ]);
     } else if (chartType === 'SingleLine') {
         seriesData = data.map(item => [
             Date.parse(item.date),
             item.close
         ]);
     }
-    chart.yAxis[0].update({
-        title: { text: chartType === 'SingleLine' ? '股價' : 'OHLC' }
-    });
-
-    chart.series[0].update({
-        type: chartType === 'SingleLine' ? 'line' : chartType,
-        data: seriesData,
-        lineColor: chartType === 'SingleLine' ? 'blue' : 'black',// 根據 chartType 設置顏色
-        name: chartType === 'SingleLine' ? StockData.title+'股價' : StockData.title // Add a null value if chartType is not 'SingleLine'
-    });
-
-    if (chartType === 'candlestick' || chartType === 'OHLC') {
+    volumeData = data.map(item => [
+        Date.parse(item.date),
+        item.volume
+    ]);
+    
+    if(chartType === 'candlestick' || chartType === 'ohlc'|| chartType === 'SingleLine'){
+        chart.yAxis[0].update({
+            title: { text: chartType === 'SingleLine' ? '股價' : 'OHLC' }
+        });
+        chart.series[0].update({
+            type: chartType === 'SingleLine' ? 'line' : chartType,
+            data: seriesData,
+            lineColor: chartType === 'SingleLine' ? '#1947A3' : 'black',// 根據 chartType 設置顏色
+            name: chartType === 'SingleLine' ? StockData.title+'股價' : StockData.title
+        });
         chart.series[1].update({
             type: 'column',
-            name: 'Volume',
             data: volumeData,
-            yAxis: 1
+            name: '交易量'
         });
     }
 };
-
-function createStockChart() {
+function createStockChart() {// 創建股票圖表
     chart = Highcharts.stockChart('StockChart', {
         rangeSelector: { selected: 4 },
         title: { text: StockData.title},
@@ -61,7 +61,14 @@ function createStockChart() {
                 labels: { align: 'left', x: 3 },
                 height: '60%',
                 lineWidth: 2,
-                resize: { enabled: true }
+                resize: { enabled: true },
+                crosshair: {
+                    snap: true, // yAxis 的 crosshair 配置
+                    label: {
+                        enabled: true,
+                        format: '{value:,.0f}'
+                    }
+                }
             },
             {
                 labels: { align: 'right', x: -3 },
@@ -69,7 +76,14 @@ function createStockChart() {
                 top: '65%',
                 height: '35%',
                 offset: 0,
-                lineWidth: 2
+                lineWidth: 2,
+                crosshair: {
+                    snap: true, // yAxis 的 crosshair 配置
+                    label: {
+                        enabled: true,
+                        format: '{value:,.0f}'
+                    }
+                }
             }
         ],
         tooltip: {
@@ -77,12 +91,11 @@ function createStockChart() {
             crosshairs: false
         },
         xAxis: {
-            crosshair: { snap: false },
-            events: {
-                setExtremes: function (e) {
-                    if (e.trigger !== 'crosshair') {
-                        this.chart.xAxis[0].drawCrosshair(e);
-                    }
+            crosshair: {
+                snap: false, // yAxis 的 crosshair 配置
+                label: {
+                    enabled: true,
+                    format: '{value: %Y-%m-%d}'
                 }
             }
         },
@@ -117,7 +130,6 @@ function createStockChart() {
         ]
     });
 }
-
 window.onload = async function() {
     await loadAndRenderChart('candlestick'); // 先加載數據
     createStockChart();
