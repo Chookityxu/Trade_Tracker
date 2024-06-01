@@ -4,7 +4,7 @@ let data,StockData;
 let chartType = 'candlestick';
 async function loadAndRenderChart(chartType) {// 加載並渲染圖表
     console.log(chartType);
-    const response = await fetch('../../assets/Json/0050.json');
+    const response = await fetch('/Trade_Tracker/assets/Json/0050.json');// 加載數據
     StockData = await response.json();
     data = StockData.data;
     let seriesData;
@@ -16,7 +16,7 @@ async function loadAndRenderChart(chartType) {// 加載並渲染圖表
     if (!chart) {
         createStockChart();
     }
-    if (chartType === 'candlestick' || chartType === 'ohlc') {
+    if (chartType === 'candlestick' || chartType === 'ohlc') {//設置數據
         seriesData = data.map(item => [
             Date.parse(item.date),
             item.open,
@@ -30,12 +30,13 @@ async function loadAndRenderChart(chartType) {// 加載並渲染圖表
             item.close
         ]);
     }
-    volumeData = data.map(item => [
+
+    volumeData = data.map(item => [// 設置交易量數據
         Date.parse(item.date),
         item.volume
     ]);
     
-    if(chartType === 'candlestick' || chartType === 'ohlc'|| chartType === 'SingleLine'){
+    if(chartType === 'candlestick' || chartType === 'ohlc'|| chartType === 'SingleLine'){// 設置均線數據
         chart.yAxis[0].update({
             title: { text: chartType === 'SingleLine' ? '股價' : 'OHLC' }
         });
@@ -130,11 +131,63 @@ function createStockChart() {// 創建股票圖表
         ]
     });
 }
-window.onload = async function() {
-    await loadAndRenderChart('candlestick'); // 先加載數據
+async function initialize() {
+    await loadAndRenderChart( 'candlestick');
     createStockChart();
     ['candlestick', 'ohlc', 'SingleLine'].forEach(type => {
         const button = document.getElementById(type + 'Btn');
         button.addEventListener('click', () => loadAndRenderChart(type));
     });
+}
+let names;
+let input = document.getElementById("search-input");
+
+function displayNames(value) {
+    input.value = value;
+    removeElements();
+}
+
+function removeElements() {
+    let items = document.querySelectorAll(".list-items");
+    items.forEach((item) => {
+        item.remove();
+    });
+}
+
+async function fetchNames() {
+    const response = await fetch('/Trade_Tracker/assets/Json/Stock_list.json');
+    names = await response.json();
+}
+
+function createListItem(name, inputValue) {
+    let listItem = document.createElement("li");
+    listItem.classList.add("list-items");
+    listItem.style.cursor = "pointer";
+    listItem.setAttribute("onclick", "displayNames('" + name + "')");
+    let word = "<b>" + name.substr(0, inputValue.length) + "</b>";
+    word += name.substr(inputValue.length);
+    listItem.innerHTML = word;
+    return listItem;
+}
+
+function handleInput(e) {
+    removeElements();
+    let count = 0;
+    for (let name of names) {
+        if (
+            name.toLowerCase().startsWith(input.value.toLowerCase()) &&
+            input.value != "" &&
+            count < 5
+        ) {
+            count++;
+            let listItem = createListItem(name, input.value);
+            document.querySelector(".list").appendChild(listItem);
+        }
+    }
+}
+
+window.onload = async () => {
+    await fetchNames();
+    input.addEventListener("keyup", handleInput);
+    initialize();
 };

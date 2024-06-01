@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP&family=Noto+Serif+TC:wght@700&family=Poetsen+One&display=swap');
+
+#search-box {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 30px;
+    padding: 5px 10px;
+    box-shadow: 0 7px 7px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    width: 50vmin;
+}
+.form-control:focus {
+    border-color: transparent;
+    box-shadow: none;
+}
+#search-input {
+    border: none;
+    outline: none;
+    flex-grow: 1;
+    padding: 5px 10px;
+    border-radius: 30px;
+    font-size: 16px;
+    width: 50vmin;
+}
+.search-box input::placeholder {
+    color: #999;
+}
+#search-box-button {
+    border: none;
+    background: none;
+    padding: 0;
+    margin-left: 10px;
+    cursor: pointer;
+}
+#search-box-button-index {
+    font-size: 20px;
+    color: #999;
+}
+
+#suggestion {
+    list-style: none;
+    width: 50vmin;
+    font-size: 1.2rem;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 400;
+}
+.list {
+    width: 50vmin;
+    background-color: #ffffff;
+    border-radius: 0 0 5px 5px;
+}
+.list-items {
+    padding: 2px 5px;
+}
+.list-items:hover {
+    background-color: #dddddd;
+}
