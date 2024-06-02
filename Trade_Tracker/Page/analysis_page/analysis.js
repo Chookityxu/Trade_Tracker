@@ -3,12 +3,12 @@ const groupingUnits = [[ 'week', [1] ], [ 'month', [1, 2, 3, 4, 6] ]];
 let data,StockData;
 let chartType = 'candlestick';
 let names;
+let filename;
 let input = document.getElementById("search-input");
-let stockCode=document.getElementById("search-input").value;
     // 加載並渲染圖表
 async function loadAndRenderChart(chartType) {// 加載並渲染圖表
         console.log(chartType);
-        const response = await fetch('/Trade_Tracker/assets/Json/0050.json');// 加載數據
+        const response = await fetch('/Trade_Tracker/assets/Json/'+filename);// 加載數據
         StockData = await response.json();
         data = StockData.data;
         let seriesData;
@@ -187,5 +187,12 @@ function handleInput(e) {
 window.onload = async () => {
     await fetchNames();
     input.addEventListener("keyup", handleInput);
-    initialize();
+    searchBoxBtn.onclick =() => {
+        jsonInput=input.value;
+        let parts = jsonInput.split("_"); // 使用 "_" 來分割字符串
+        filename = parts[0] + ".json";
+        initialize();
+    }
+
+
 };

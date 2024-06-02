@@ -26,14 +26,14 @@
 .search-box input::placeholder {
     color: #999;
 }
-#search-box-button {
+#searchBoxBtn {
     border: none;
     background: none;
     padding: 0;
     margin-left: 10px;
     cursor: pointer;
 }
-#search-box-button-index {
+#searchBoxBtnIndex {
     font-size: 20px;
     color: #999;
 }
