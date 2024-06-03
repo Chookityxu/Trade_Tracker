@@ -7,10 +7,7 @@ let filename;
 let input = document.getElementById("search-input");
     // 加載並渲染圖表
 async function loadAndRenderChart(chartType) {// 加載並渲染圖表
-        console.log(chartType);
-        const response = await fetch('/Trade_Tracker/assets/Json/'+filename);// 加載數據
-        StockData = await response.json();
-        data = StockData.data;
+        data = await loadStockData();
         let seriesData;
         let volumeData;
 
@@ -53,7 +50,18 @@ async function loadAndRenderChart(chartType) {// 加載並渲染圖表
             });
         }
     };
-
+function loadStockData() {// 加載股票數據
+    console.log('loadStockData'); 
+    fetch('http://127.0.0.1:5000/search', {
+        method: 'post',
+        body: new FormData(document.querySelector('form'))
+    })
+    .then(response => response.json())
+    .then(data => {
+        // 這裡的 "data" 就是你的爬蟲結果
+        console.log(data);
+    });
+    }
 function createStockChart() {// 創建股票圖表
         chart = Highcharts.stockChart('StockChart', {
             rangeSelector: { selected: 4 },
@@ -133,12 +141,12 @@ function createStockChart() {// 創建股票圖表
         });
     }
 async function initialize() {// 抓取資料
-        await loadAndRenderChart( 'candlestick');
-        createStockChart();
-        ['candlestick', 'ohlc', 'SingleLine'].forEach(type => {
-            const button = document.getElementById(type + 'Btn');
-            button.addEventListener('click', () => loadAndRenderChart(type));
-        });
+        document.getElementById('searchBoxBtn').onclick(loadStockData);;
+        // await loadAndRenderChart( 'candlestick');
+        // ['candlestick', 'ohlc', 'SingleLine'].forEach(type => {
+        //     const button = document.getElementById(type + 'Btn');
+        //     button.addEventListener('click', () => loadAndRenderChart(type));
+        // });
     }
 // 搜索功能
 function displayNames(value) {
@@ -187,11 +195,8 @@ function handleInput(e) {
 window.onload = async () => {
     await fetchNames();
     input.addEventListener("keyup", handleInput);
-    searchBoxBtn.onclick =() => {
-        jsonInput=input.value;
-        let parts = jsonInput.split("_"); // 使用 "_" 來分割字符串
-        filename = parts[0] + ".json";
-        initialize();
+    searchBoxBtn.onclick = async() => {
+        await initialize();
     }
 
 
