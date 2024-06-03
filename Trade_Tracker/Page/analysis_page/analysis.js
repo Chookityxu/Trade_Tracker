@@ -3,25 +3,23 @@ const groupingUnits = [
     ["week", [1]],
     ["month", [1, 2, 3, 4, 6]],
 ];
-let data, StockData;
+let StockData;
 let chartType = "candlestick";
 let names;
 let filename;
 let input = document.getElementById("search-input");
+
 // 加載並渲染圖表
 async function loadAndRenderChart(chartType) {
     // 加載並渲染圖表
-    StockData = await loadStockData();
-    data = StockData.data;
     let seriesData;
     let volumeData;
-
     if (!chart) {
         createStockChart();
     }
     if (chartType === "candlestick" || chartType === "ohlc") {
         //設置數據
-        seriesData = data.map((item) => [
+        seriesData = StockData.data.map((item) => [
             Date.parse(item.date),
             item.open,
             item.high,
@@ -29,10 +27,10 @@ async function loadAndRenderChart(chartType) {
             item.close,
         ]);
     } else if (chartType === "SingleLine") {
-        seriesData = data.map((item) => [Date.parse(item.date), item.close]);
+        seriesData = StockData.data.map((item) => [Date.parse(item.date), item.close]);
     }
 
-    volumeData = data.map((item) => [
+    volumeData = StockData.data.map((item) => [
         // 設置交易量數據
         Date.parse(item.date),
         item.volume,
@@ -63,20 +61,25 @@ async function loadAndRenderChart(chartType) {
     }
 }
 function loadStockData() {
-    // 加載股票數據
-    const fd = document.getElementById("search-input").value;
-    fetch("http://127.0.0.1:5000/search", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ value: fd }),
-    })
-        .then((response) => response.json())
-        .then((data) => {
-            return data;
-        });
-        initialize();
+    return new Promise((resolve, reject) => {
+        const fd = document.getElementById("search-input").value;
+        const StartDate = document.getElementById("StartMonth").value;
+        const EndDate = document.getElementById("EndMonth").value;
+        fetch("http://127.0.0.1:5000/search", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ value: fd , start: StartDate, end: EndDate}),
+        })
+        .then(response => response.json())
+        .then(data => {
+            let jsonObject = JSON.parse(data);
+            StockData = jsonObject;
+            resolve();
+        })
+        .catch(error => reject(error));
+    });
 }
 function createStockChart() {
     // 創建股票圖表
@@ -158,7 +161,7 @@ function createStockChart() {
     });
 }
 async function initialize() {
-    // 抓取資料
+    await loadStockData();
     await loadAndRenderChart("candlestick");
     createStockChart();
     ["candlestick", "ohlc", "SingleLine"].forEach((type) => {
@@ -213,4 +216,7 @@ function handleInput(e) {
 window.onload = async () => {
     await fetchNames();
     input.addEventListener("keyup", handleInput);
+    searchBoxBtn.onclick = function () {
+        initialize();
+    }
 };

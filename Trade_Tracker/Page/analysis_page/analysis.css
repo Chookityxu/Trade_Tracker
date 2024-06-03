@@ -64,3 +64,13 @@
 
     margin: 0.25rem;
 }
+#date_group {
+    justify-content: space-between;
+    margin-top: 10px;
+}
+#dateText{
+    font-size: 2rem;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 400;
+
+}

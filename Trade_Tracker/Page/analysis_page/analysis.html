@@ -103,22 +103,37 @@
                 ></div>
                 <div class="col-md-4">
                     <div class="col">
-                        <div class="container row-md-6">
-                            <form id="MyForm" onsubmit="event.preventDefault();loadStockData() ">
+                        <div class="container row-md-4">
+                            <div class="row justify-content-center">
+                                <div class="col-md-12 text-center">
+                                    <p class="my-3" id="dateText">選擇日期</p>
+                                </div>
+                            </div>
+                            <div class="row justify-content-around">
+                                <div class="col-md-5">
+                                    <input class="form-control" type="month" name="StartYearMonth" id="StartMonth">
+                                </div>
+                                <div class="col-md-5">
+                                    <input class="form-control" type="month" name="EndYearMonth" id="EndMonth">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container row-md-4">
+                            <form id="MyForm" onsubmit="event.preventDefault(); ">
                             <div id = "search-box">
-                                    <input
-                                        type="text"
-                                        class="form-control"
+                                <input
+                                    type="text"
+                                    class="form-control"
                                         id="search-input"
                                         name="value"
-                                        placeholder="輸入代號"
-                                    />
-                                    <button id="searchBoxBtn">
-                                        <i
-                                            class="bi bi-search"
+                                    placeholder="輸入代號"
+                                />
+                                <button id="searchBoxBtn">
+                                    <i
+                                        class="bi bi-search"
                                             id="search-box-button-index"
-                                        ></i>
-                                    </button>
+                                    ></i>
+                                </button>
                             </div>
                             </form>
                             <ul
@@ -127,7 +142,7 @@
                                 style="position: absolute; z-index: 100"
                             ></ul>
                         </div>
-                        <div class="container row-md-6">
+                        <div class="container row-md-4">
                             <div
                                 class="d-flex justify-content-between"
                                 id="button_group"
