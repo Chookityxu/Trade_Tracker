@@ -104,8 +104,8 @@
                 <div class="col-md-4">
                     <div class="col">
                         <div class="container row-md-6">
-                            <form id="MyForm" >
-                            <div id="search-box">
+                            <form id="MyForm" onsubmit="event.preventDefault();loadStockData() ">
+                            <div id = "search-box">
                                     <input
                                         type="text"
                                         class="form-control"
