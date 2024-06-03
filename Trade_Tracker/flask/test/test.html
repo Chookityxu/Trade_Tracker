@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Page Title</title>
+</head>
+<body>
+
+<input class="form-control" type="month" name="startDate" id="startDate">
+<label id="test"></label>
+<button onclick="test()">Test</button>
+</body>
+<script>
+function test(){
+    const StartDate = document.getElementById("startDate").value;
+    document.getElementById('test').innerHTML=StartDate
+}
+</script>
+</html>
